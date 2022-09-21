@@ -47,7 +47,7 @@ app.route("/articles")
                 if (e) {
                     res.send(e)
                 } else {
-                    res.send("Posted all articles")
+                    res.send("Posted all articles!")
                 }
             })
         } else { // For single article Post request
@@ -87,7 +87,6 @@ app.route('/articles/:articleTitle')
                 res.send(article)
             }
         })
-
     })
 
     .put((req, res) => {
@@ -95,12 +94,29 @@ app.route('/articles/:articleTitle')
         const article = req.body;
         const articleTitle = req.params.articleTitle;
 
-        Article.replaceOne({title: articleTitle}, article, (e) => {
+        Article.replaceOne({
+            title: articleTitle
+        }, article, (e) => {
             if (e) {
                 res.send(e);
             } else {
-                res.send("Article:" + articleTitle + " was replaced successfully with Article:" + article.title)
+                res.send(`Article:${articleTitle} was replaced successfully with Article: ${article.title}!`);
             }
         })
     })
 
+    .patch((req, res) => {
+
+        const article = req.body;
+        const articleTitle = req.params.articleTitle;
+ 
+        Article.updateOne({
+            title: articleTitle
+        }, article, (e) => {
+            if (e) {
+                res.send(e);
+            } else {
+                res.send(`Article:${articleTitle} was updated!`)
+            }
+        })
+    })
