@@ -1,6 +1,7 @@
 const express = require("express")
 const mongoose = require("mongoose")
 const bodyParser = require("body-parser");
+const { request } = require("express");
 require("dotenv").config()
 
 //Setting up express server
@@ -117,6 +118,19 @@ app.route('/articles/:articleTitle')
                 res.send(e);
             } else {
                 res.send(`Article:${articleTitle} was updated!`)
+            }
+        })
+    })
+
+    .delete((req,res)=>{
+
+        const articleTitle = req.params.articleTitle;
+
+        Article.deleteOne({title: articleTitle}, (e)=>{
+            if(e){
+                res.send(e);
+            } else {
+                res.send(`Article:${articleTitle} was deleted!`);
             }
         })
     })
