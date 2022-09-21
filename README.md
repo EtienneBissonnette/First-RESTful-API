@@ -1,2 +1,2 @@
 # First-RESTful-API
-my first RESTful wiki Articles API
+My First RESTful wiki Articles API
